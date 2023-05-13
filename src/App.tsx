@@ -2,7 +2,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import TicTacToe from './TicTacToe';
+import TicTacToe from './components/TicTacToe';
 import 'papercss/dist/paper.min.css';
 
 export default function App() {

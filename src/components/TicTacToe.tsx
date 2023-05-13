@@ -10,12 +10,12 @@ import {
   GAME_STATES,
   DIMENSIONS,
   GAME_MODES,
-} from './constants';
+} from '../helpers/constants';
 import Board from './Board';
-import { getRandomInt, switchPlayer } from './utils';
-import { minimax } from './minimax';
+import { getRandomInt, switchPlayer } from '../utilities/utils';
+import { minimax } from '../utilities/minimax';
 import { ResultModal } from './ResultModal';
-import { border } from './styles';
+import { border } from '../styles';
 
 const arr = new Array(DIMENSIONS ** 2).fill(null);
 const board = new Board();

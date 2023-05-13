@@ -1,6 +1,6 @@
 // Board.tsx
 
-import { DIMENSIONS, DRAW } from './constants';
+import { DIMENSIONS, DRAW } from '../helpers/constants';
 
 type Grid = Array<null | number>;
 export default class Board {

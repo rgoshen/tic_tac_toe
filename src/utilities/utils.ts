@@ -1,6 +1,6 @@
 // utils.ts
 
-import { PLAYER_O, PLAYER_X } from './constants';
+import { PLAYER_O, PLAYER_X } from '../helpers/constants';
 
 export const switchPlayer = (player: number) => {
   return player === PLAYER_X ? PLAYER_O : PLAYER_X;

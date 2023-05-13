@@ -1,8 +1,8 @@
 // minimax.ts
 
-import { SCORES } from './constants';
+import { SCORES } from '../helpers/constants';
 import { switchPlayer } from './utils';
-import Board from './Board';
+import Board from '../components/Board';
 
 export const minimax = (
   board: Board,
