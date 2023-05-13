@@ -1,5 +1,6 @@
 // minimax.ts
 
+import Board from './Board';
 import { SCORES } from './constants';
 import { switchPlayer } from './utils';
 
