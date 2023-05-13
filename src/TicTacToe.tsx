@@ -1,6 +1,9 @@
+// TicTacToe.tsx
+
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { DIMENSIONS, PLAYER_X, PLAYER_O, SQUARE_DIMS } from './constants';
+import { getRandomInt } from './utils';
 
 const emptyGrid = new Array(DIMENSIONS ** 2).fill(null);
 
@@ -17,6 +20,14 @@ export default function TicTacToe() {
       gridCopy[index] = player;
       return gridCopy;
     });
+  };
+
+  const aiMove = () => {
+    let index = getRandomInt(0, 8);
+    while (grid[index]) {
+      index = getRandomInt(0, 8);
+    }
+    move(index, players.ai);
   };
 
   const humanMove = (index: number) => {
