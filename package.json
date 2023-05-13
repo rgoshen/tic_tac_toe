@@ -2,7 +2,7 @@
   "name": "tic_tac_toe",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://github.com/rgoshen/tic_tac_toe/",
+  "homepage": "http://rgoshen.github.io/tic_tac_toe",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
