@@ -10,6 +10,7 @@ import {
   SQUARE_DIMS,
   GAME_STATES,
   DRAW,
+  GAME_MODES,
 } from './constants';
 import { getRandomInt, switchPlayer } from './utils';
 import { minimax } from './minimax';
@@ -26,6 +27,7 @@ export default function TicTacToe() {
   const [gameState, setGameState] = useState(GAME_STATES.notStarted);
   const [nextMove, setNextMove] = useState<null | number>(null);
   const [winner, setWinner] = useState<null | string>(null);
+  const [mode, setMode] = useState(GAME_MODES.medium);
 
   const move = useCallback(
     (index: number, player: number | null) => {
@@ -40,17 +42,48 @@ export default function TicTacToe() {
     [gameState]
   );
 
+  /**
+   * Make the AI move. If it's the first move (the board is empty),
+   * make the move at any random cell to skip unnecessary Minimax calculations
+   */
+  // prettier-ignore
   const aiMove = useCallback(() => {
+    // Important to pass a copy of the grid here
     const board = new Board(grid.concat());
-    const index = board.isEmpty(grid)
-      ? getRandomInt(0, 8)
-      : minimax(board, players.ai!)[1];
+    const emptyIndices = board.getEmptySquares(grid);
+    let index;
+    switch (mode) {
+    case GAME_MODES.easy:
+      do {
+        index = getRandomInt(0, 8);
+      } while (!emptyIndices.includes(index));
+      break;
+      // Medium level is approx. half of the moves are Minimax and the other half random
+    case GAME_MODES.medium:
+      // eslint-disable-next-line no-case-declarations
+      const smartMove = !board.isEmpty(grid) && Math.random() < 0.5;
+      if (smartMove) {
+        index = minimax(board, players.ai!)[1];
+      } else {
+        do {
+          index = getRandomInt(0, 8);
+        } while (!emptyIndices.includes(index));
+      }
+      break;
+    case GAME_MODES.difficult:
+    default:
+      index = board.isEmpty(grid)
+        ? getRandomInt(0, 8)
+        : minimax(board, players.ai!)[1];
+    }
 
-    if (index !== null && !grid[index]) {
-      move(index, players.ai);
+    if (index && !grid[index]) {
+      if (players.ai !== null) {
+        move(index, players.ai);
+      }
       setNextMove(players.human);
     }
-  }, [move, grid, players]);
+  }, [move, grid, players, mode]);
 
   const humanMove = (index: number) => {
     if (!grid[index] && nextMove === players.human) {
@@ -111,12 +144,29 @@ export default function TicTacToe() {
     setGrid(emptyGrid);
   };
 
+  const changeMode = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setMode(e.target.value);
+  };
+
   // prettier-ignore
   switch (gameState) {
   case GAME_STATES.notStarted:
   default:
     return (
       <div>
+        <Inner>
+          <p>Select difficulty</p>
+          <select onChange={changeMode} value={mode}>
+            {Object.keys(GAME_MODES).map((key) => {
+              const gameMode = GAME_MODES[key];
+              return (
+                <option key={gameMode} value={gameMode}>
+                  {key}
+                </option>
+              );
+            })}
+          </select>
+        </Inner>
         <Inner>
           <p>Choose your player</p>
           <ButtonRow>

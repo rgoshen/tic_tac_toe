@@ -18,3 +18,8 @@ export const SCORES: Record<string, number> = {
   0: 0,
   2: -1,
 };
+export const GAME_MODES: Record<string, string> = {
+  easy: 'easy',
+  medium: 'medium',
+  difficult: 'difficult',
+};
