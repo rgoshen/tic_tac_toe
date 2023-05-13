@@ -9,6 +9,12 @@ export default class Board {
     this.grid = grid || new Array(DIMENSIONS ** 2).fill(null);
   }
 
+  makeMove = (square: number, player: number) => {
+    if (this.grid[square] === null) {
+      this.grid[square] = player;
+    }
+  };
+
   // Collect indices of the empty squares and return them
   getEmptySquares = (grid = this.grid) => {
     const squares: number[] = [];

@@ -12,6 +12,7 @@ import {
   DRAW,
 } from './constants';
 import { getRandomInt, switchPlayer } from './utils';
+import { minimax } from './minimax';
 
 const emptyGrid = new Array(DIMENSIONS ** 2).fill(null);
 const board = new Board();
@@ -40,13 +41,15 @@ export default function TicTacToe() {
   );
 
   const aiMove = useCallback(() => {
-    let index = getRandomInt(0, 8);
-    while (grid[index]) {
-      index = getRandomInt(0, 8);
-    }
+    const board = new Board(grid.concat());
+    const index = board.isEmpty(grid)
+      ? getRandomInt(0, 8)
+      : minimax(board, players.ai!)[1];
 
-    move(index, players.ai);
-    setNextMove(players.human);
+    if (index !== null && !grid[index]) {
+      move(index, players.ai);
+      setNextMove(players.human);
+    }
   }, [move, grid, players]);
 
   const humanMove = (index: number) => {
