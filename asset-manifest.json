@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/rgoshen/tic_tac_toe/static/css/main.26281a1b.css",
-    "main.js": "/rgoshen/tic_tac_toe/static/js/main.a0e06db7.js",
-    "index.html": "/rgoshen/tic_tac_toe/index.html",
-    "main.26281a1b.css.map": "/rgoshen/tic_tac_toe/static/css/main.26281a1b.css.map",
-    "main.a0e06db7.js.map": "/rgoshen/tic_tac_toe/static/js/main.a0e06db7.js.map"
+    "main.css": "/tic_tac_toe/static/css/main.26281a1b.css",
+    "main.js": "/tic_tac_toe/static/js/main.6d784515.js",
+    "index.html": "/tic_tac_toe/index.html",
+    "main.26281a1b.css.map": "/tic_tac_toe/static/css/main.26281a1b.css.map",
+    "main.6d784515.js.map": "/tic_tac_toe/static/js/main.6d784515.js.map"
   },
   "entrypoints": [
     "static/css/main.26281a1b.css",
-    "static/js/main.a0e06db7.js"
+    "static/js/main.6d784515.js"
   ]
 }
