@@ -26,7 +26,6 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "test:file": "jest --config=jest.config.js --",
-    "test:watch": "jest --watchAll",
     "eject": "react-scripts eject",
     "prepare": "husky install",
     "predeploy": "npm run build",
