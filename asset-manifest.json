@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/rgoshen/tic_tac_toe/static/css/main.26281a1b.css",
+    "main.js": "/rgoshen/tic_tac_toe/static/js/main.a0e06db7.js",
+    "index.html": "/rgoshen/tic_tac_toe/index.html",
+    "main.26281a1b.css.map": "/rgoshen/tic_tac_toe/static/css/main.26281a1b.css.map",
+    "main.a0e06db7.js.map": "/rgoshen/tic_tac_toe/static/js/main.a0e06db7.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.26281a1b.css",
+    "static/js/main.a0e06db7.js"
+  ]
+}
