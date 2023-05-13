@@ -1,6 +1,6 @@
 // TicTacToe.tsx
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import styled from 'styled-components';
 import {
   DIMENSIONS,
@@ -20,34 +20,58 @@ export default function TicTacToe() {
     ai: null,
   });
   const [gameState, setGameState] = useState(GAME_STATES.notStarted);
+  const [nextMove, setNextMove] = useState<null | number>(null);
 
-  const move = (index: number, player: number | null) => {
-    if (player !== null) {
-      setGrid((grid) => {
-        const gridCopy = grid.concat();
-        gridCopy[index] = player;
-        return gridCopy;
-      });
-    }
-  };
+  const move = useCallback(
+    (index: number, player: number | null) => {
+      if (player && gameState === GAME_STATES.inProgress) {
+        setGrid((grid) => {
+          const gridCopy = grid.concat();
+          gridCopy[index] = player;
+          return gridCopy;
+        });
+      }
+    },
+    [gameState]
+  );
 
-  const aiMove = () => {
+  const aiMove = useCallback(() => {
     let index = getRandomInt(0, 8);
     while (grid[index]) {
       index = getRandomInt(0, 8);
     }
+
     move(index, players.ai);
-  };
+    setNextMove(players.human);
+  }, [move, grid, players]);
 
   const humanMove = (index: number) => {
-    if (!grid[index]) {
+    if (!grid[index] && nextMove === players.human) {
       move(index, players.human);
+      setNextMove(players.ai);
     }
   };
+
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+    if (
+      nextMove !== null &&
+      nextMove === players.ai &&
+      gameState !== GAME_STATES.over
+    ) {
+      // Delay AI moves to make them seem more natural
+      timeout = setTimeout(() => {
+        aiMove();
+      }, 500);
+    }
+    return () => timeout && clearTimeout(timeout);
+  }, [nextMove, aiMove, players.ai, gameState]);
 
   const choosePlayer = (option: number) => {
     setPlayers({ human: option, ai: switchPlayer(option) });
     setGameState(GAME_STATES.inProgress);
+    // Set the Player X to make the first move
+    setNextMove(PLAYER_X);
   };
 
   return gameState === GAME_STATES.notStarted ? (
